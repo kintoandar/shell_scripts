@@ -22,7 +22,7 @@ $VERSION = '0.0.3';
 # Other parts based on notify.pl from Luke Macken
 # http://fedora.feedjack.org/user/918/
 #
-# ssmtp email notification support add by Joel Bastos
+# ssmtp email notification support added by Joel Bastos
 # http://kintoandar.blogspot.com
 #
 #--------------------------------------------------------------------
