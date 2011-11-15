@@ -1,11 +1,11 @@
 #!/usr/bin/perl
 
-use strict;
-use warnings;
-
 ##########################
 # kintoandar.blogspot.com
 ##########################
+
+use strict;
+use warnings;
 
 #--------------------------- Variables ------------------------------
 # Where is the ossec alert.log?
