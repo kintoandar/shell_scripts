@@ -1,8 +1,8 @@
 #!/bin/bash
 
-#############
-# kintoandar
-#############
+##########################
+# kintoandar.blogspot.com
+##########################
 
 REMOTE_ADDR="example.com"
 REMOTE_PORT=22

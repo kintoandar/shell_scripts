@@ -1,5 +1,9 @@
 #!/usr/bin/perl -w
 
+##########################
+# kintoandar.blogspot.com
+##########################
+
 use strict;
 
 my $raid_status="";

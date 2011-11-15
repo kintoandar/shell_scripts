@@ -1,8 +1,8 @@
 #!/bin/bash
 
-#############
-# kintoandar
-#############
+##########################
+# kintoandar.blogspot.com
+##########################
 
 #Checkpoint
 echo ""
