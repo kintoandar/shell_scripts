@@ -12,7 +12,6 @@ echo ""
 #############################################################################################################
 #Checkpoint
 echo "IP"
-ADMIN="192.168.1.1/32"
 
 #############################################################################################################
 # Interface Variables                                                                                                                                      
@@ -65,9 +64,11 @@ $iptables -A OUTPUT -o lo -j ACCEPT
 echo "INPUT"
 
 # SSH Access
-#for ip in $ADMIN; do
+#for ip in 192.168.0.1; do
 #	$iptables -A INPUT -s $ip -p tcp -m tcp --dport 22 -j ACCEPT
 #done
+
+$iptables -A INPUT -p tcp -m tcp --dport 22 -j ACCEPT
 
 # ICMP
 $iptables -A INPUT -p icmp -j ACCEPT
@@ -77,6 +78,7 @@ $iptables -A INPUT -p icmp -j ACCEPT
 #############################################################################################################
 #Checkpoint
 echo "FOWARD"
+#$iptables -A FORWARD -s 192.168.122.0/24 -j ACCEPT
 
 #############################################################################################################
 # OUTPUT
@@ -120,19 +122,19 @@ $iptables -A FORWARD -m limit --limit 100/min -j LOG --log-level 6 --log-prefix 
 $iptables -A OUTPUT  -m limit --limit 100/min -j LOG --log-level 6 --log-prefix "DROP-OUTPUT "
 
 #############################################################################################################
-# Deploy Procedure                                                                                                                                   
+# Deploy Procedure                                                                                           
 #############################################################################################################
 #Checkpoint
 echo "SAVE"
 
-${iptables}-save > /etc/iptables.rules
+${iptables}-save > /etc/iptables/rules.v4
 
 # FOWARDING
 #echo 1 > /proc/sys/net/ipv4/ip_forward
 
 #Checkpoint
 #echo "SYNC WITH NODE2"
-#scp /etc/rc.d/rc.fw node2:/etc/rc.d/
+#scp /etc/iptables/rules.v4 node2:/etc/iptables/rules.v4
 #scp /etc/sysconfig/iptables node2:/etc/sysconfig/
 
 echo "--"
