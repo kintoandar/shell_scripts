@@ -19,8 +19,8 @@ echo "IP"
 #Checkpoint
 echo "INTERFACE"
 
-ETH0=`ifconfig eth0 | grep 'inet addr' | cut -d : -f 2 | cut -d \  -f 1`/32
-WLAN0=`ifconfig wlan0 | grep 'inet addr' | cut -d : -f 2 | cut -d \  -f 1`/32
+#ETH0=`ifconfig eth0 | grep 'inet addr' | cut -d : -f 2 | cut -d \  -f 1`/32
+#WLAN0=`ifconfig wlan0 | grep 'inet addr' | cut -d : -f 2 | cut -d \  -f 1`/32
 
 #############################################################################################################
 # IPTABLES rule set																	 
@@ -73,6 +73,10 @@ $iptables -A INPUT -p tcp -m tcp --dport 22 -j ACCEPT
 # ICMP
 $iptables -A INPUT -p icmp -j ACCEPT
 
+# DROP silently
+$iptables -A INPUT -m pkttype --pkt-type multicast -j DROP
+$iptables -A INPUT -m pkttype --pkt-type broadcast -j DROP
+
 #############################################################################################################
 # FOWARD
 #############################################################################################################
@@ -110,14 +114,7 @@ echo "NAT"
 #Checkpoint
 echo "LOG"
 
-if [ $ETH0 != "/32" ]; then
-	$iptables -A INPUT   -d $ETH0  -m limit --limit 100/min -j LOG --log-level 6 --log-prefix "DROP-INPUT "
-fi
-
-if [ $WLAN0 != "/32" ]; then
-	$iptables -A INPUT   -d $WLAN0 -m limit --limit 100/min -j LOG --log-level 6 --log-prefix "DROP-INPUT "
-fi
-
+$iptables -A INPUT   -m limit --limit 100/min -j LOG --log-level 6 --log-prefix "DROP-INPUT "
 $iptables -A FORWARD -m limit --limit 100/min -j LOG --log-level 6 --log-prefix "DROP-FORWARD "
 $iptables -A OUTPUT  -m limit --limit 100/min -j LOG --log-level 6 --log-prefix "DROP-OUTPUT "
 
