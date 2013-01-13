@@ -5,7 +5,7 @@
 ######################
 
 # vhost(s) logs
-LOGS="/opt/wwwclients/logs/*log"
+LOGS="/vhost/logs/*log"
 
 # 24h notification
 DATE=`date |awk {'print $1" "$2" "$3'}`
