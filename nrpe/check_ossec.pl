@@ -1,8 +1,8 @@
 #!/usr/bin/perl
 
-##########################
-# kintoandar.blogspot.com
-##########################
+######################
+# blog.kintoandar.com
+######################
 
 use strict;
 use warnings;

@@ -1,8 +1,8 @@
 #!/usr/bin/perl -w
 
-##########################
-# kintoandar.blogspot.com
-##########################
+######################
+# blog.kintoandar.com
+######################
 
 use strict;
 
