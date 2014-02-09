@@ -23,7 +23,7 @@ $VERSION = '0.0.3';
 # http://fedora.feedjack.org/user/918/
 #
 # ssmtp email notification support added by Joel Bastos
-# http://kintoandar.blogspot.com
+# http://blog.kintoandar.com
 #
 #--------------------------------------------------------------------
 

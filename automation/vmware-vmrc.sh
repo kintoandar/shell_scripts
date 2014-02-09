@@ -1,7 +1,7 @@
 #!/bin/bash
 
 ############################################################################################
-# check http://kintoandar.blogspot.com/2011/06/gnome-3-vmware-console-with-vmware-vmrc.html
+# check http://blog.kintoandar.com/2011/06/gnome-3-vmware-console-with-vmware-vmrc.html
 # for more info on this script
 ############################################################################################
 

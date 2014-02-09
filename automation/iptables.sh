@@ -1,7 +1,7 @@
 #!/bin/bash
 
 ##########################
-# kintoandar.blogspot.com
+# blog.kintoandar.com
 ##########################
 
 #Checkpoint
