@@ -1,0 +1,116 @@
+#!/bin/sh
+#
+# ghost-example.com - this script starts the ghost blogging package
+#
+# chkconfig:   - 95 20
+# description: ghost is a blogging platform built using javascript \
+#              and running on nodejs
+#
+
+# Source function library.
+. /etc/rc.d/init.d/functions
+
+# Source networking configuration.
+. /etc/sysconfig/network
+
+# Check that networking is up.
+[ "$NETWORKING" = "no" ] && exit 0
+
+# Change this stuff
+site="example.com"
+home="/opt/$site"
+exec="/usr/bin/node $home/index.js >> /opt/logs/ghost-$site.log &"
+prog="ghost"
+user="apache"
+
+[ -e /etc/sysconfig/$prog ] && . /etc/sysconfig/$prog
+
+lockfile=/var/lock/subsys/$site
+
+start() {
+    echo -n $"Starting $prog: "
+    export NODE_ENV=production
+    cd $home
+    daemon --user=$user $exec
+    retval=$?
+    echo
+    [ $retval -eq 0 ] && touch $lockfile
+    return $retval
+}
+
+stop() {
+    echo -n $"Stopping $prog: "
+    # stop it here, often "killproc $prog"
+    pid=`ps -u $user -fw | grep $site | grep -v " grep " | awk '{print $2}'`
+    kill -9 $pid > /dev/null 2>&1 && echo_success || echo_failure
+    retval=$?
+    echo
+    [ $retval -eq 0 ] && rm -f $lockfile
+    return $retval
+}
+
+restart() {
+    stop
+    start
+}
+
+my_status() {
+        local base pid lock_file=
+
+        base=${1##*/}
+
+        # get pid
+        pid=`ps -u $user -fw | grep $site | grep -v " grep " | awk '{print $2}'`
+
+        if [ -z "${lock_file}" ]; then
+        lock_file=${base}
+        fi
+        # See if we have no PID and /var/lock/subsys/${lock_file} exists
+        if [[ -z "$pid" && -f /var/lock/subsys/${lock_file} ]]; then
+                echo $"${base} dead but subsys locked"
+                return 2
+        fi
+
+        if [ -z "$pid" ]; then
+                echo $"${base} is stopped"
+                return 3
+        fi
+
+        if [ -n "$pid" ]; then
+                echo $"${base} (pid $pid) is running..."
+                return 0
+        fi
+
+}
+
+rh_status() {
+    # run checks to determine if the service is running or use generic status
+    my_status $site
+}
+
+rh_status_q() {
+    rh_status >/dev/null 2>&1
+}
+
+
+
+case "$1" in
+    start)
+        rh_status_q && exit 0
+        $1
+        ;;
+    stop)
+        rh_status_q || exit 0
+        $1
+        ;;
+    restart)
+        $1
+        ;;
+    status)
+        rh_status
+        ;;
+    *)
+        echo $"Usage: $0 {start|stop|restart|status}"
+        exit 2
+esac
+exit $?
