@@ -1,11 +1,15 @@
 #!/bin/sh
 #
-# ghost-example.com - this script starts the ghost blogging package
+# ghost-example.com - This script starts/stops the ghost blogging package
 #
 # chkconfig:   - 95 20
 # description: ghost is a blogging platform built using javascript \
 #              and running on nodejs
 #
+
+# AUTHOR: kintoandar - https://blog.kintoandar.com
+# HOW-TO: Just find/replace 'example.com' for your own domain, \
+#         so you can have multiple instances of ghost
 
 # Source function library.
 . /etc/rc.d/init.d/functions
@@ -18,8 +22,9 @@
 
 # Change this stuff
 site="example.com"
-home="/opt/$site"
-exec="/usr/bin/node $home/index.js >> /opt/logs/ghost-$site.log &"
+ghost_home="/opt/$site"
+log_path="/opt/logs"
+exec="/usr/bin/node $ghost_home/index.js >> $log_path/ghost-$site.log &"
 prog="ghost"
 user="apache"
 
@@ -30,7 +35,7 @@ lockfile=/var/lock/subsys/$site
 start() {
     echo -n $"Starting $prog: "
     export NODE_ENV=production
-    cd $home
+    cd $ghost_home
     daemon --user=$user $exec
     retval=$?
     echo
@@ -55,32 +60,29 @@ restart() {
 }
 
 my_status() {
-        local base pid lock_file=
+    local base pid lock_file=
+    base=${1##*/}
+    pid=`ps -u $user -fw | grep $site | grep -v " grep " | awk '{print $2}'`
 
-        base=${1##*/}
+    if [ -z "${lock_file}" ]; then
+    lock_file=${base}
+    fi
 
-        # get pid
-        pid=`ps -u $user -fw | grep $site | grep -v " grep " | awk '{print $2}'`
+    # See if we have no PID and /var/lock/subsys/${lock_file} exists
+    if [[ -z "$pid" && -f /var/lock/subsys/${lock_file} ]]; then
+        echo $"${base} dead but subsys locked"
+        return 2
+    fi
 
-        if [ -z "${lock_file}" ]; then
-        lock_file=${base}
-        fi
-        # See if we have no PID and /var/lock/subsys/${lock_file} exists
-        if [[ -z "$pid" && -f /var/lock/subsys/${lock_file} ]]; then
-                echo $"${base} dead but subsys locked"
-                return 2
-        fi
+    if [ -z "$pid" ]; then
+       echo $"${base} is stopped"
+       return 3
+    fi
 
-        if [ -z "$pid" ]; then
-                echo $"${base} is stopped"
-                return 3
-        fi
-
-        if [ -n "$pid" ]; then
-                echo $"${base} (pid $pid) is running..."
-                return 0
-        fi
-
+    if [ -n "$pid" ]; then
+        echo $"${base} (pid $pid) is running..."
+        return 0
+    fi
 }
 
 rh_status() {
@@ -91,8 +93,6 @@ rh_status() {
 rh_status_q() {
     rh_status >/dev/null 2>&1
 }
-
-
 
 case "$1" in
     start)
