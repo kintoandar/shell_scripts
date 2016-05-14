@@ -55,5 +55,3 @@ if ($msg eq ""){
     print "$num alerts found: $msg";
     exit 2;
 }
-print "Something is wrong, script went out of bounds?";
-exit 1;
