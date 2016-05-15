@@ -26,7 +26,7 @@ These are the current scripts available.
 Scripts to make your life a little better.
 
 ### backup_home.sh
-Backup cherry picked files to a encrypted `tar.gz` file using `gpg`.
+Backup cherry picked files to an encrypted `tar.gz` file using `gpg`.
 
 ### iptables.sh
 Easy to use [IPTables](https://blog.kintoandar.com/2012/01/attack-detection-and-notification-with.html) template.
