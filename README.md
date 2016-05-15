@@ -31,12 +31,12 @@ Backup cherry picked files to a encrypted `tar.gz` file using `gpg`.
 ### iptables.sh
 Easy to use [IPTables](https://blog.kintoandar.com/2012/01/attack-detection-and-notification-with.html) template.
 
-📝Check out the [blogpost](https://blog.kintoandar.com/2012/01/attack-detection-and-notification-with.html) about it.
+📝 Check out the [blogpost](https://blog.kintoandar.com/2012/01/attack-detection-and-notification-with.html) about it.
 
 ### vmware-vmrc.sh
 Fix for the [VMWare console](https://blog.kintoandar.com/2011/06/gnome-3-vmware-console-with-vmware-vmrc.html) client bug.
 
-📝Check out the [blogpost](https://blog.kintoandar.com/2011/06/gnome-3-vmware-console-with-vmware-vmrc.html) about it.
+📝 Check out the [blogpost](https://blog.kintoandar.com/2011/06/gnome-3-vmware-console-with-vmware-vmrc.html) about it.
 
 ### vpn_ssh.sh
 Establish a VPN using `ssh` and `pppd`.
@@ -56,19 +56,19 @@ Simple `dmraid` monitoring script.
 ### check_modsec.sh
 Integrates [modsecurity](https://blog.kintoandar.com/2013/01/modsecurity-nagios-nrpe-check.html) with Nagios providing configurable hit count alerts.
 
-📝Check out the [blogpost](https://blog.kintoandar.com/2013/01/modsecurity-nagios-nrpe-check.html) about it.
+📝 Check out the [blogpost](https://blog.kintoandar.com/2013/01/modsecurity-nagios-nrpe-check.html) about it.
 
 ### check_ossec.pl
 Integrates [OSSEC](https://blog.kintoandar.com/2011/01/nagios-nrpe-ossec-check.html) with Nagios providing configurable hit count alerts.
 
-📝Check out the [blogpost](https://blog.kintoandar.com/2011/01/nagios-nrpe-ossec-check.html) about it.
+📝 Check out the [blogpost](https://blog.kintoandar.com/2011/01/nagios-nrpe-ossec-check.html) about it.
 
 ## Plugins
 
 ### fnotify.pl
 [IRSSI](https://blog.kintoandar.com/2011/06/irssi-irc-mention-notify-by-email-using.html) email notifications from IRC mentions.
 
-📝Check out the [blogpost](https://blog.kintoandar.com/2011/06/irssi-irc-mention-notify-by-email-using.html) about it.
+📝 Check out the [blogpost](https://blog.kintoandar.com/2011/06/irssi-irc-mention-notify-by-email-using.html) about it.
 
 # How did this repo came to be
 Back in 2011 I wrote a [blogpost](https://blog.kintoandar.com/2011/11/version-20.html) and this repo was born.
