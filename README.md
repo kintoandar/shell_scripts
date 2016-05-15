@@ -23,7 +23,7 @@ Table of Contents
 These are the current scripts available.
 
 ## Automation
-Scripts to make you life a little better.
+Scripts to make your life a little better.
 
 ### backup_home.sh
 Backup cherry picked files to a encrypted `tar.gz` file using `gpg`.
