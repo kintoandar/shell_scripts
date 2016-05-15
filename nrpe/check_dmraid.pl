@@ -20,6 +20,3 @@ if ($raid_status[0] eq "status : ok" && $raid_status[1] eq "status : ok"){
         exit 2;
 
 }
-
-print "Unkown error: It shouldn't get here.";
-exit 3;
